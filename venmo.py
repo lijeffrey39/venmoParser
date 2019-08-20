@@ -1,23 +1,13 @@
-from selenium import webdriver
-import os
-import time
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium import webdriver
+import time
 
-# url = "https://venmo.com/lijeffrey39"
+f = open('session_info.txt', 'r')
+command_executor = f.readline().rstrip()
+session_id = f.readline().rstrip()
 
-# chrome_options = webdriver.ChromeOptions()
-# prefs = {"profile.managed_default_content_settings.images": 2}
-# chrome_options.add_experimental_option("prefs", prefs)
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument('log-level=3')
-# chromedriverName = 'chromedriver' if (platform.system() == "Darwin") else 'chromedriver.exe'
-# PROJECT_ROOT = os.getcwd()
-# DRIVER_BIN = os.path.join(PROJECT_ROOT, chromedriverName)
-
-# driver = webdriver.Chrome(executable_path = DRIVER_BIN)
-driver = webdriver.Remote(command_executor = 'http://127.0.0.1:49396')
-driver.session_id = '794dfa49214193b476b3e4bc1e64d09a'
-print(driver.current_url)
+driver = webdriver.Remote(command_executor = command_executor)
+driver.session_id = session_id
 
 while (driver.find_element_by_class_name('moreButton').text == "More"):
 	more = driver.find_element_by_class_name('moreButton')
